@@ -13,8 +13,7 @@ $ yarn
 you can modify react-server port by modify package.json's port.
 
 ```shell
-// pure react
-$ yarn start
+$ yarn start /** pure react **/
 
 // pure electron
 $ yarn electron
