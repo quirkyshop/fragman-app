@@ -1,0 +1,47 @@
+{
+  "name": "create-react-app-with-electron",
+  "version": "0.1.0",
+  "description": "best boilerplates for electron-react",
+  "author": "quirkyvar",
+  "private": true,
+  "dependencies": {
+    "nodobjc": "^2.1.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
+  "homepage": "./",
+  "devDependencies": {
+    "electron": "~1.6.2",
+    "electron-builder": "^17.3.1",
+    "electron-rebuild": "^1.5.7",
+    "npm-run-all": "^4.0.2",
+    "react-scripts": "0.9.5"
+  },
+  "postinstall": "install-app-deps",
+  "main": "build/main.js",
+  "electronMirror": "",
+  "port": 8000,
+  "scripts": {
+    "start": "PORT=$npm_package_port react-scripts start",
+    "electron": "npm run rebuild && ELECTRON_DEV=1 electron main.js",
+    "electron:pro": "npm run rebuild && electron main.js",
+    "electron-react": "run-p start wait-react",
+    "wait-react": "node scripts/wait-react.js",
+    "rebuild": "electron-rebuild",
+    "build": "react-scripts build",
+    "pack:common": "run-s build rebuild move-electron",
+    "move-electron": "node scripts/cp-main.js",
+    "pack:all": "run-s pack:common build:all",
+    "pack:mac": "run-s pack:common build:mac",
+    "pack:win": "run-s pack:common build:win",
+    "pack:linux": "run-s pack:common build:linux",
+    "build:all": "ELECTRON_MIRROR=$electronMirror build --all",
+    "build:mac": "ELECTRON_MIRROR=$electronMirror build --mac",
+    "build:win": "ELECTRON_MIRROR=$electronMirror build --win",
+    "build:linux": "ELECTRON_MIRROR=$electronMirror build --linux"
+  },
+  "optionalDependencies": {
+    "7zip-bin": "^2.0.4",
+    "7zip-bin-mac": "^1.0.1"
+  }
+}
