@@ -10,15 +10,14 @@ $ yarn
 
 # develope
 
-you can modify react-server port by modify package.json's port.
+you can change react-server port by modify package.json's port.
 
 ```shell
 $ yarn start ## pure react
 
-// pure electron
-$ yarn electron
+$ yarn electron ## pure electron
 
-// react and electron(auto run electron when react-server is start)
+## react and electron(auto run electron when react-server is start)
 $ yarn electron-react
 
 ```
@@ -43,6 +42,10 @@ eg. `"electronMirror": `https://npm.taobao.org/mirrors/electron/` for china user
 
 This project is already include electron-builder.If you encounter native-module problems. check [multi-platform-build](https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build);
 
+Any package problem, pls check this out.[electron-builder's doc](https://github.com/electron-userland/electron-builder).
+
+> ps: this doc may take you a lots of time.
+
 ```shell 
 $ yarn pack:all 
 $ yarn pack:mac 
@@ -50,3 +53,6 @@ $ yarn pack:win
 $ yarn pack:linux 
 ```
 
+# TroubleShooting
+
+leave it to issue.
