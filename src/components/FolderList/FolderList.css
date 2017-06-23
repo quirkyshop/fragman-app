@@ -1,0 +1,128 @@
+@import url(~antd/dist/antd.css);
+html, body, :global(#root) {
+  height: 100%; }
+
+#eku-root {
+  height: 100%; }
+
+::selection {
+  color: #fff;
+  background: #8bb8ed; }
+
+.flex-center-middle {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+
+.folder-wrapper {
+  position: relative;
+  height: 100%;
+  display: inline-block; }
+  .folder-wrapper .category-block-wrapper {
+    vertical-align: top;
+    width: 180px;
+    border-right: 1px solid #e5e5e5;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 100%;
+    text-align: center;
+    position: relative;
+    padding: 8px 0; }
+  .folder-wrapper .filelist-wrapper {
+    vertical-align: top;
+    width: 200px;
+    border-right: 1px solid #e5e5e5;
+    border-left: none;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 100%;
+    text-align: center;
+    position: relative; }
+    .folder-wrapper .filelist-wrapper .filelist-item-focus {
+      background: #F8C46E; }
+    .folder-wrapper .filelist-wrapper .filelist-item-wrapper {
+      display: block;
+      border-bottom: 1px solid #e5e5e5;
+      width: 100%;
+      text-align: left;
+      padding: 12px; }
+      .folder-wrapper .filelist-wrapper .filelist-item-wrapper .filelist-item-name {
+        font-weight: bold;
+        margin-bottom: 4px;
+        line-height: 28px;
+        -webkit-user-select: none;
+        overflow: hidden;
+        height: 28px;
+        text-overflow: ellipsis; }
+      .folder-wrapper .filelist-wrapper .filelist-item-wrapper .filelist-item-name-placeholder {
+        color: #999; }
+      .folder-wrapper .filelist-wrapper .filelist-item-wrapper .filelist-item-desc {
+        font-size: 12px;
+        width: 100%;
+        color: #999;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-user-select: none;
+        height: 14px;
+        line-height: 14px; }
+  .folder-wrapper .add-folder-btn {
+    position: absolute;
+    bottom: 16px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+    font-size: 16px; }
+    .folder-wrapper .add-folder-btn .add-folder-btn-icon {
+      margin-right: 4px; }
+  .folder-wrapper .category-item-wrapper .rename-folder-wrapper {
+    padding: 2px 12px;
+    background: #4990E2; }
+    .folder-wrapper .category-item-wrapper .rename-folder-wrapper .rename-folder-input {
+      border: 1px solid #fff; }
+  .folder-wrapper .category-item-wrapper .category-item-label {
+    padding-left: 12px;
+    text-align: left;
+    color: #999;
+    font-size: 16px;
+    line-height: 20px;
+    -webkit-user-select: none; }
+  .folder-wrapper .category-item-wrapper .category-item-ext-label {
+    font-size: 14px; }
+  .folder-wrapper .category-item-wrapper .category-item-value {
+    padding: 4px 0; }
+    .folder-wrapper .category-item-wrapper .category-item-value .fav-empty-contens {
+      text-align: left;
+      padding-left: 24px;
+      color: #e5e5e5; }
+    .folder-wrapper .category-item-wrapper .category-item-value .category-item-name {
+      text-align: left;
+      padding: 0px 24px;
+      font-size: 14px;
+      color: #666;
+      line-height: 28px;
+      -webkit-user-select: none;
+      /* height: 24px; */
+      height: 28px;
+      box-sizing: border-box;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+    .folder-wrapper .category-item-wrapper .category-item-value .category-item-name-focus {
+      background: #4990E2;
+      color: #fff; }

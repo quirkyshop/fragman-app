@@ -1,0 +1,36 @@
+.eku-toast-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  z-index: 1000; }
+  .eku-toast-mask .eku-toast-wrapper {
+    position: fixed;
+    overflow: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    -webkit-overflow-scrolling: touch;
+    outline: 0; }
+    .eku-toast-mask .eku-toast-wrapper .eku-toast-content {
+      color: #fff;
+      position: relative;
+      width: auto;
+      margin: 0 auto;
+      top: 200px;
+      padding: 32px 0;
+      width: 168px;
+      border-radius: 8px;
+      text-align: center;
+      background-color: rgba(55, 55, 55, 0.9);
+      filter: alpha(opacity=90);
+      z-index: 1000; }
+      .eku-toast-mask .eku-toast-wrapper .eku-toast-content .eku-toast-icon {
+        font-size: 64px; }
+      .eku-toast-mask .eku-toast-wrapper .eku-toast-content .eku-toast-msg {
+        font-size: 24px;
+        margin-top: 4px; }

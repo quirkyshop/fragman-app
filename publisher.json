@@ -1,0 +1,7 @@
+{
+  "transport": {
+    "module": "github",
+    "repository": "https://github.com/quirkyshop/test-electron-auto-upload",
+    "token": ""
+  }
+}

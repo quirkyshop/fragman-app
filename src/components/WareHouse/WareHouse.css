@@ -1,0 +1,47 @@
+.eku-warehouse-wrapper {
+  height: 100%;
+  width: 100%; }
+
+.eku-warehouse-folder-code-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: calc(100% - 48px); }
+
+.eku-code-content-wrapper {
+  flex: 1; }
+  .eku-code-content-wrapper .empty-code-img {
+    display: block;
+    -webkit-user-select: none; }
+  .eku-code-content-wrapper .empty-code-title {
+    text-align: center;
+    font-size: 24px;
+    margin: 24px 0 8px;
+    -webkit-user-select: none; }
+  .eku-code-content-wrapper .empty-code-desc {
+    text-align: center;
+    color: #999;
+    -webkit-user-select: none; }
+
+.eku-warehouse-nav-wrapper {
+  height: 48px;
+  width: 100%;
+  background: #e6e6e6;
+  padding-left: 150px;
+  line-height: 40px; }
+  .eku-warehouse-nav-wrapper .nav-add-btn-icon {
+    font-size: 14px; }
+  .eku-warehouse-nav-wrapper .nav-operate-btn {
+    margin-right: 8px;
+    font-size: 12px;
+    height: 28px;
+    width: 80px; }
+  .eku-warehouse-nav-wrapper .toggle-nav-view {
+    float: right;
+    margin-right: 36px;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer; }
+    .eku-warehouse-nav-wrapper .toggle-nav-view .anticon-bars {
+      cursor: pointer; }

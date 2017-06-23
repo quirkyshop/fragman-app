@@ -1,6 +1,5 @@
 appId: com.example.app
 copyright: Example co
-productName: MyApp
 
 asar: true
 
@@ -23,13 +22,18 @@ dmg:
     - type: file
       x: 130
       y: 150
+  background: build/background.png
+
 
 mac:
-  target: dmg
   category: public.app-category.tools
+  icon: build/icon.icns
 
 win:
-  target: nsis
+  target: squirrel
+
+squirrelWindows:
+  iconUrl: https://raw.githubusercontent.com/megahertz/electron-simple-updater/master/example/build/icon.ico
 
 linux:
   target:

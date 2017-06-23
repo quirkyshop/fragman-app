@@ -1,0 +1,136 @@
+@import "../common.scss";
+
+.folder-wrapper {	
+	position: relative;
+	height: 100%;
+	display: inline-block;
+	
+	.category-block-wrapper {
+		vertical-align: top;
+		width: 180px;
+		border-right: 1px solid #e5e5e5;
+		display: inline-block;
+		box-sizing: border-box;
+		height: 100%;
+		text-align: center;
+		position: relative;
+		padding: 8px 0;
+	}
+
+	.filelist-wrapper {
+		vertical-align: top;
+		width: 200px;
+		border-right: 1px solid #e5e5e5;
+		border-left: none;
+		display: inline-block;
+		box-sizing: border-box;
+		height: 100%;
+		text-align: center;
+		position: relative;
+
+		.filelist-item-focus {
+			background: #F8C46E;
+		}
+
+		.filelist-item-wrapper {
+			display: block;
+			border-bottom: 1px solid #e5e5e5;
+			width: 100%;
+			text-align: left;
+			padding: 12px;
+
+			.filelist-item-name {
+				font-weight: bold;
+			    margin-bottom: 4px;
+			    line-height: 28px;
+			    -webkit-user-select: none;
+			    overflow: hidden;
+			    height: 28px;
+			    text-overflow: ellipsis;
+			}
+
+			.filelist-item-name-placeholder {
+				color: #999;
+			}
+
+			.filelist-item-desc {
+				font-size: 12px;
+			    width: 100%;
+			    color: #999;
+			    overflow: hidden;
+			    text-overflow: ellipsis;
+			    -webkit-user-select: none;
+			    height: 14px;
+			    line-height: 14px;
+			}
+		}
+	}
+
+	.add-folder-btn {
+		position: absolute;
+		bottom: 16px;
+		width: 100%;
+		text-align: center;
+		cursor: pointer;
+		-webkit-user-select: none;
+		font-size: 16px;
+
+		.add-folder-btn-icon {
+			margin-right: 4px;
+		}
+	}
+
+	.category-item-wrapper {
+
+		.rename-folder-wrapper {
+			padding: 2px 12px;
+			background: #4990E2;
+
+			.rename-folder-input {
+				border: 1px solid #fff;
+			}
+		}
+
+		.category-item-label {
+			padding-left: 12px;
+			text-align: left;
+			color: #999;
+			font-size: 16px;
+			line-height: 20px;
+			-webkit-user-select: none;
+		}
+
+		.category-item-ext-label {
+			font-size: 14px;
+		}
+
+		.category-item-value {
+			padding: 4px 0;
+
+			.fav-empty-contens {
+				text-align: left;
+				padding-left: 24px;
+				color: #e5e5e5;
+			}
+
+			.category-item-name {
+				text-align: left;
+			    padding: 0px 24px;
+			    font-size: 14px;
+			    color: #666;
+			    line-height: 28px;
+			    -webkit-user-select: none;
+			    /* height: 24px; */
+			    height: 28px;
+			    box-sizing: border-box;
+			    overflow: hidden;
+			    text-overflow: ellipsis;
+			}
+
+			.category-item-name-focus {
+				background: #4990E2;
+				color: #fff;
+			}
+		}
+	}
+}
