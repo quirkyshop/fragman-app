@@ -152,7 +152,7 @@ class FolderList extends Component {
 						  onClick={that.handleChangeFolder.bind(that, folderItem, cateKey)}
 						  onMouseDown={formatRightClick}
 						>
-						  	{name}
+						  	{name ? name : <div className="fav-empty-folder-name">Untitled</div>}
 						</div>
 					}					
 				})
@@ -177,11 +177,13 @@ class FolderList extends Component {
 			const isLocalCate = ['common', 'fav'].indexOf(cateKey) !== -1;
 			const cateLabelCls = isLocalCate ? '' : 'category-item-ext-label';
 			let rightClickProps = {};
-			if (!isLocalCate) rightClickProps.onMouseDown = that.handleCateRightClick.bind(that, cateKey);			
+			if (!isLocalCate) rightClickProps.onMouseDown = that.handleCateRightClick.bind(that, cateKey);
+
+			const cateKeyIcon = cateKey === 'fav' ? <Icon type="heart" /> : <Icon type="tag" />;
 
 			return (<div className="category-item-wrapper" key={cateKey}>
 				<div className={`category-item-label ${cateLabelCls}`} {...rightClickProps}>
-					{cateKey}					
+					<span className="catekey-icon">{cateKeyIcon}</span>{cateKey}					
 				</div>
 				<div className="category-item-value">{childs}</div>
 				{newFolderComponent}
@@ -195,7 +197,6 @@ class FolderList extends Component {
 	}
 
 	handleFileChange(fileItem, id, focusCateGory) {
-		console.log('触发fileChange---------->', id);
 		const { onFileChange, focusFile } = this.props;
 		if (id !== focusFile) {
 			onFileChange && onFileChange(fileItem, id, focusCateGory);	
@@ -262,7 +263,6 @@ class FolderList extends Component {
 
 		if (hideFileList) return null;
 
-		console.log('=================> inner:', fileList.length);
 		const componentList = fileList.map((fileItem) => {
 			const { name, modifyTime, createTime , code, id } = fileItem;
 			let lastModifyTime = modifyTime || createTime;

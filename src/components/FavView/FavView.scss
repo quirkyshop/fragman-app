@@ -93,11 +93,18 @@
     			width: calc(100% - 60px);
     			transition: width 0.5s;
     			-webkit-user-select: none;
+				
 
     			.fav-list-item-name {
     				font-weight: bold;
     				font-size: 14px;
     				-webkit-user-select: none;
+
+					.fav-list-empty-name {
+						-webkit-user-select: none;
+						color: #e5e5e5;
+						text-align: left;
+					}
     			}
 
     			.fav-list-item-content {

@@ -7,11 +7,15 @@ directories:
   buildResources: build/
   output: dist/
 
+
+
 files:
   - package.json
   - main.js
   - build/
   - node_modules/
+
+compression: maximum
 
 dmg:
   contents:

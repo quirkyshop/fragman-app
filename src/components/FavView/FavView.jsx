@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Button, Icon } from 'antd';
+import { hashHistory } from 'react-router';
 import './FavView.css';
 import Code from '../Code/Code';
 import Toast from '../Toast/Toast';
@@ -7,6 +8,7 @@ import FolderList from '../FolderList/FolderList';
 import { syncFileData, getFileData, generateRandomKey } from '../../helper/stateHelper';
 import { change2WareHouse } from '../../helper/toggleHelper';
 import clipboardHelper from '../../helper/clipboardHelper.js';
+import { electron } from '../../helper/common.js';
 import { getFullContent, getBriefContent } from '../../utils/common.js';
 import { NEW_FOLDER_KEY, SPLIT_KEY, EMPTY_KEY } from '../../constants.js';
 
@@ -40,6 +42,10 @@ class FavView extends Component {
 				commonList: common || []
 			}); 
 		});
+
+		electron.ipcRenderer.on('change-to-ware-house-view-reply', (e) => {	
+			hashHistory.push({ pathname: '/wareHouse' });
+		});
 	}
 
 	handleCopyContent(code) {
@@ -68,7 +74,7 @@ class FavView extends Component {
 					onDoubleClick={that.handleCopyContent.bind(that, code)}
 				>
 					<div className="fav-list-item">
-						<div className="fav-list-item-name">{name}</div>
+						<div className="fav-list-item-name">{name ? name : <div className="fav-list-empty-name">Untitled</div>}</div>
 						<div className="fav-list-item-content">{briefContent}</div>
 					</div>
 					<div className="fav-list-item-oper"><Icon type="copy" /></div>
@@ -91,11 +97,10 @@ class FavView extends Component {
 
 	handleToggleView() {
 		const that = this;
-		change2WareHouse(() => {
-			if (that.props.history) {
-				this.props.history.push('/wareHouse');
-			}
-		});
+		electron.ipcRenderer.send('change-to-ware-house-view');
+		// change2WareHouse(() => {
+		// 	hashHistory.push({ pathname: '/wareHouse' });
+		// });
 	}
 
 	renderNav() {

@@ -71,6 +71,10 @@
           font-weight: bold;
           font-size: 14px;
           -webkit-user-select: none; }
+          .eku-fav-view-wrapper .fav-list-wrapper .fav-list-item-wrapper .fav-list-item .fav-list-item-name .fav-list-empty-name {
+            -webkit-user-select: none;
+            color: #e5e5e5;
+            text-align: left; }
         .eku-fav-view-wrapper .fav-list-wrapper .fav-list-item-wrapper .fav-list-item .fav-list-item-content {
           color: #999;
           font-size: 12px;

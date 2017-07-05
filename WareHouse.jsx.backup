@@ -20,8 +20,7 @@ import PrismDraftDecorator from 'draft-js-prism';
 class WareHouse extends Component {
 	constructor(props) {
 		super(props);
-
-		this.codeChanging = null;
+		
 		this.state = {
 			currentCode: null, // 
 			currentFolder: null,
@@ -116,7 +115,6 @@ class WareHouse extends Component {
 		}
 
 		const { content, fileId } = currentCode || {};
-		console.log('@@@@@@@@@@@@@@@@@@@@ renderContent', content);
 		const formatContent = this.getFormatContent(content);
 		const formatCode = {
 			...currentCode,
@@ -137,20 +135,16 @@ class WareHouse extends Component {
 		const { type: modifySource, item: modifyItem, operType } = action || {};
 		const { cateGory, focusFolder, focusFile, currentCode } = this.state;
 
-		// 用于持久化的数据
-		let syncCateGory = {};
-		let syncFavList = [];
-
-		// 用于本地state更新的数据
 		let preCateGory = Object.assign({}, cateGory);
-		let formatCateGory = {};		
+		let formatCateGory = {};
 		let formatList = [];
 		let currentFile = focusFile;
 		let currentFolder = focusFolder;
 
-		let favList = [];		
+		let favList = [];
 		let isTotalyEmpty = false;
 		let emptySum = 0;
+
 
 		if (modifySource === 'cateGory') {
 			if (operType === 'add') { // 插入都是新建一个可删除的cateGory
@@ -179,14 +173,12 @@ class WareHouse extends Component {
 				let folderList = preCateGory[currentCateKey];
 				if (!folderList || folderList.length === 0) emptySum = emptySum + 1;
 
-				let formatFolderList = []; // state
-				let syncFolderList = []; // 持久化
-
+				let formatFolderList = [];
 				folderList.forEach((folderItem) => {
 					const { fileList = [], id: folderId, name: folderName } = folderItem;
 					const isFocusFolder = folderId === focusFolder; // 是否为当前folder
 
-					let handledFolder = Object.assign({}, folderItem);					
+					let handledFolder = Object.assign({}, folderItem);
 
 					let needEditCurrentFolder = true; // 需要判断是否需要继续操作folder
 					if (modifySource === 'folder') {						
@@ -214,19 +206,11 @@ class WareHouse extends Component {
 						}
 					}
 
-					let syncFolder = Object.assign({}, handledFolder);
-
 					if (needEditCurrentFolder) {
-						let handledFileList = []; // state
-						let syncFileList = []; // 持久化
-
+						let handledFileList = [];					
 						if (fileList && Array.isArray(fileList)) {						
 							fileList.forEach((fileItem) => {
-								
-								let handledFile = fileItem; // state
-								let syncFile = Object.assign({}, handledFile); // 持久化
-
-
+								let handledFile = fileItem;
 								const { id: fileId, code: fileCode } = handledFile;
 								let shouldAppendFile = true;
 								let shouldFavCode = false;
@@ -238,20 +222,12 @@ class WareHouse extends Component {
 								// 修改文件
 								if (modifySource === 'file') {
 									const { id: operId, code: modifyCode } = modifyItem || {};
-									const { content: modifyCodeContent } = modifyCode || {};
+									const { content: modifyCodeContent } = modifyCode || {}
+									console.log('modifySource:', modifySource, ', operType:', operType, ', modifyCode:', modifyCode);
 
 									if (operType === 'change') {
 										if (fileId === operId) { // 名字修改，则更改日期
 											handledFile = {
-												...modifyItem,
-												code: {
-													...modifyCode,
-													content: modifyCodeContent
-												},
-												modifyTime: moment().format('YYYY-MM-DD HH:mm:ss')
-											};
-
-											syncFile = {
 												...modifyItem,
 												code: {
 													...modifyCode,
@@ -280,13 +256,8 @@ class WareHouse extends Component {
 									}
 								}
 
-								// state
 								shouldFavCode && favList.push(handledFile); // 收集fav信息
-								shouldAppendFile && handledFileList.push(handledFile);
-								
-								// 持久化
-								shouldFavCode && syncFavList.push(syncFile); // 收集fav信息
-								shouldAppendFile && syncFileList.push(syncFile);				
+								shouldAppendFile && handledFileList.push(handledFile);							
 							});
 
 							if (isFocusFolder) { // 新增文件
@@ -298,7 +269,6 @@ class WareHouse extends Component {
 									const { code: formatNewCode, id: formatNewId } = modifyItem || {};
 									const { name: newCodeName, content: newCodeContent } = formatNewCode || {};
 									let formatNewCodeContent = null;
-									console.log('@@@@@@@@@@@@@@@@@@@@ new file or code');
 									if (newCodeContent) formatNewCodeContent = that.getFormatContent(newCodeContent);
 									const newFileId = that.getNewFileId();
 									let finalNewId = formatNewId || newFileId;
@@ -310,7 +280,7 @@ class WareHouse extends Component {
 										fileId: finalNewId
 									};
 
-									const stringNewCode = { // 存储的是字符串量
+									const storeNewCode = { // 存储的是字符串量
 										...newCode,
 										content: that.serializeContent(formatNewCodeContent)
 									};
@@ -318,14 +288,7 @@ class WareHouse extends Component {
 									handledFileList = formatFileList.concat({
 										name: newCodeName || '',
 										createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
-										code: newCode,
-										id: finalNewId
-									});
-
-									syncFileList = formatFileList.concat({
-										name: newCodeName || '',
-										createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
-										code: stringNewCode,
+										code: storeNewCode,
 										id: finalNewId
 									});
 
@@ -339,28 +302,24 @@ class WareHouse extends Component {
 							}
 						}
 						
-						// state
 						handledFolder.fileList = handledFileList;
-						formatFolderList.push(handledFolder);
 
-						// sync
-						syncFolder.fileList = syncFileList;
-						syncFolderList.push(syncFolder);
+						console.log('eachFolder fileList:', handledFolder, folderName, formatList);
+
+						
+						formatFolderList.push(handledFolder);
 					}
 				});
 
-				syncCateGory[currentCateKey] = syncFolderList; // 用于持久化
-				formatCateGory[currentCateKey] = formatFolderList; // 用于本地state，快速，无须转化
+				formatCateGory[currentCateKey] = formatFolderList;
 			}	
 		});
 
 		if (emptySum === cateKeysArr.length - 1) isTotalyEmpty = true;
 
-		syncCateGory.fav = syncFavList;
 		formatCateGory.fav = favList;
 
 		const calResult = {
-			syncCateGory,
 			cateGory: formatCateGory,
 			fileList: formatList,
 			currentCode: formatCurrentCode,
@@ -384,20 +343,21 @@ class WareHouse extends Component {
 			code
 		};
 
-		const { cateGory, fileList, focusFile, isTotalyEmpty, currentCode, syncCateGory } = this.modifyCatgeGoryByAction({
+		const { cateGory, fileList, focusFile, isTotalyEmpty, currentCode } = this.modifyCatgeGoryByAction({
 			type: 'file',
 			operType: 'change',
 			item: newFile
 		});
 
-		if (this.codeChanging) clearTimeout(this.codeChanging);
-		this.codeChanging = setTimeout(() => {			
+		syncFileData(cateGory, () => {
 			that.setState({
+				currentCode,
 				cateGory,
-				fileList
+				focusFile,
+				fileList,
+				isTotalyEmpty
 			});
-			syncFileData(syncCateGory, () => {});	
-		}, 400);
+		});
 	}
 
 	handleFolderChange(folder, cateKey) {
@@ -442,8 +402,7 @@ class WareHouse extends Component {
 			const { id, code: codeItem, name } = firstFile;
 			fileCodeProps.focusFile = id;
 
-			const { content } = codeItem || {};
-			console.log('@@@@@@@@@@@@@@@@@@@@ outer folder change');
+			const { content } = codeItem || {};			
 			const formatContent = that.getFormatContent(content);
 			fileCodeProps.currentCode = {
 				...codeItem,
@@ -464,21 +423,18 @@ class WareHouse extends Component {
 		};
 
 		const isTotalyEmpty = that.getIfEmptyCateGory(formatCateGory);
-		console.log('folder change ===>', fileCodeProps);
 
-		that.setState({
-			cateGory: formatCateGory,
-			focusCateGory: cateKey,
-			focusFolder: formatId,
-			hideFileList,
-			fileList: formatFileList,
-			isTotalyEmpty,
-			...fileCodeProps
+		syncFileData(formatCateGory, () => {
+			that.setState({
+				cateGory: formatCateGory,
+				focusCateGory: cateKey,
+				focusFolder: formatId,
+				hideFileList,
+				fileList: formatFileList,
+				isTotalyEmpty,
+				...fileCodeProps
+			});
 		});
-
-		setTimeout(function() {
-			syncFileData(formatCateGory, () => {});
-		}, 300);		
 	}
 
 	serializeContent (content) {
@@ -491,34 +447,19 @@ class WareHouse extends Component {
 
 	getFormatContent(content) {
 		let formatContent = null;
-		let decorator = new PrismDraftDecorator({
-			defaultSyntax: 'javascript'
-		});
 
 		if (content) {
-			console.log('tttttttt ype of content', typeof content);
-			if (typeof content === 'string') {			
-				let rawContentState = JSON.parse(content);
-				if (rawContentState && rawContentState.blocks && rawContentState.blocks.length) {
-					rawContentState = {
-						...rawContentState,
-						blocks: rawContentState.blocks.map((blockItem) => {
-							return {
-								...blockItem,
-								type: 'code-block'
-							}
-						})
-					};
-				}
-
-				const rawContent = convertFromRaw(rawContentState);
-
+			if (typeof content === 'string') {
+				let decorator = new PrismDraftDecorator({
+					defaultSyntax: 'javascript'
+				});
+				
+				const rawContent = convertFromRaw( JSON.parse( content) );
 				formatContent = EditorState.createWithContent(rawContent, decorator);
+				formatContent = EditorState.moveFocusToEnd(formatContent);
 			} else {
-				formatContent = content;
+				formatContent = EditorState.moveFocusToEnd(content);
 			}
-		} else {
-			formatContent = EditorState.createEmpty(decorator);			
 		}
 		
 		return formatContent;
@@ -537,26 +478,27 @@ class WareHouse extends Component {
 	handleFolderOper(operType, folderItem) {
 		// folder的改变引起全局刷新
 		const that = this;
-		const { cateGory, fileList, focusFile, focusFolder, isTotalyEmpty, currentCode, syncCategory } = this.modifyCatgeGoryByAction({
+		const { cateGory, fileList, focusFile, focusFolder, isTotalyEmpty, currentCode } = this.modifyCatgeGoryByAction({
 			type: 'folder',
 			operType,
 			item: folderItem
 		});
 
-		that.setState({
-			currentCode,
-			focusFile,
-			focusFolder,
-			cateGory,
-			fileList,
-			isTotalyEmpty
+		syncFileData(cateGory, () => {
+			that.setState({
+				currentCode,
+				focusFile,
+				focusFolder,
+				cateGory,
+				fileList,
+				isTotalyEmpty
+			});
 		});
-		syncFileData(syncCategory, () => {});
 	}
 
 	handleFileOper(operType, id) {
 		const that = this;
-		const { cateGory, fileList, focusFile, isTotalyEmpty, currentCode, syncCategory } = this.modifyCatgeGoryByAction({
+		const { cateGory, fileList, focusFile, isTotalyEmpty, currentCode } = this.modifyCatgeGoryByAction({
 			type: 'file',
 			operType,
 			item: {
@@ -564,19 +506,20 @@ class WareHouse extends Component {
 			}
 		});
 
-		that.setState({
-			currentCode,
-			focusFile,
-			cateGory,
-			fileList,
-			isTotalyEmpty
+		syncFileData(cateGory, () => {
+			that.setState({
+				currentCode,
+				focusFile,
+				cateGory,
+				fileList,
+				isTotalyEmpty
+			});
 		});
-		syncFileData(syncCategory, () => {});
 	}
 
 	handleCateGoryChange(operType, cateKey) {
 		const that = this;
-		const { cateGory, fileList, focusFile, isTotalyEmpty, currentCode, syncCategory } = this.modifyCatgeGoryByAction({
+		const { cateGory, fileList, focusFile, isTotalyEmpty, currentCode } = this.modifyCatgeGoryByAction({
 			type: 'cateGory',
 			operType,
 			item: {
@@ -584,14 +527,15 @@ class WareHouse extends Component {
 			}
 		});
 
-		that.setState({
-			currentCode,
-			focusFile,
-			cateGory,
-			fileList,
-			isTotalyEmpty
+		syncFileData(cateGory, () => {
+			that.setState({
+				currentCode,
+				focusFile,
+				cateGory,
+				fileList,
+				isTotalyEmpty
+			});
 		});
-		syncFileData(syncCategory, () => {});
 	}
 
 	renderFolderList() {
@@ -619,19 +563,21 @@ class WareHouse extends Component {
 		const { focusFolder } = this.state;		
 
 		if (focusFolder) {
-			const { cateGory, fileList, focusFile, isTotalyEmpty, currentCode, syncCategory } = this.modifyCatgeGoryByAction({				
+			const { cateGory, fileList, focusFile, isTotalyEmpty, currentCode } = this.modifyCatgeGoryByAction({				
 				type: 'file',
 				operType: 'add'
 			});
 
-			that.setState({
-				cateGory,
-				focusFile,
-				fileList,
-				currentCode,
-				isTotalyEmpty
-			});
-			syncFileData(syncCategory, () => {});	
+			syncFileData(cateGory, () => {
+				console.log('syncData====>', fileList.length);
+				that.setState({
+					cateGory,
+					focusFile,
+					fileList,
+					currentCode,
+					isTotalyEmpty
+				});
+			});	
 		}
 	}
 
@@ -646,20 +592,21 @@ class WareHouse extends Component {
 	handleImportData() {
 		const that = this;
 		importData((data) => {
-			const { cateGory, fileList, focusFile, isTotalyEmpty, currentCode, syncCategory } = this.modifyCatgeGoryByAction({
+			const { cateGory, fileList, focusFile, isTotalyEmpty, currentCode } = this.modifyCatgeGoryByAction({
 				type: 'cateGory',
 				operType: 'add', // 都是增加
 				item: data
 			});
 
-			that.setState({
-				currentCode,
-				focusFile,
-				cateGory,
-				fileList,
-				isTotalyEmpty
+			syncFileData(cateGory, () => {
+				that.setState({
+					currentCode,
+					focusFile,
+					cateGory,
+					fileList,
+					isTotalyEmpty
+				});
 			});
-			syncFileData(syncCategory, () => {});
 		});
 	}
 

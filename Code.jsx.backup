@@ -13,9 +13,21 @@ class Code extends Component {
 		const { code, id } = this.props;
 		const { name, content, isFav } = code || {};
 
+		let decorator = new PrismDraftDecorator({
+          defaultSyntax: 'javascript'
+        });
+
+		let formatState = null;
+		if (content) {
+			formatState = RichUtils.toggleBlockType(content, 'code-block');
+		} else {
+			formatState = EditorState.createEmpty(decorator);
+			formatState = RichUtils.toggleBlockType(formatState, 'code-block');
+		}
+
 		this.state = {
 			codeName: name || '',
-			editorState: content,
+			editorState: formatState,
 			isFav: isFav || false
 		};
 
@@ -31,8 +43,8 @@ class Code extends Component {
 		const { name, content, isFav } = code || {};
 
 		if (id !== nextId) {
+			console.log('new Props 改变！id:', id, 'nextId:', nextId);
 			if (!nextId) {
-				alert('no next id');
 				that.setState({
 					codeName: '',
 					editorState: EditorState.createEmpty(),
@@ -62,7 +74,7 @@ class Code extends Component {
 			codeName: changeVal
 		});
 
-		onChange && onChange(result);
+		onChange && onChange(result);		
 	}
 
 	handleChangeContent(nextEditorState) {

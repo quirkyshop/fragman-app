@@ -1,5 +1,9 @@
 @import "../common.scss";
 
+.catekey-icon {
+	margin-right: 8px;
+}
+
 .folder-wrapper {	
 	position: relative;
 	height: 100%;
@@ -111,11 +115,18 @@
 				text-align: left;
 				padding-left: 24px;
 				color: #e5e5e5;
+				-webkit-user-select: none;
+			}
+
+			.fav-empty-folder-name {
+				-webkit-user-select: none;
+				color: #e5e5e5;
+				text-align: left;
 			}
 
 			.category-item-name {
 				text-align: left;
-			    padding: 0px 24px;
+			    padding: 0 12px 0 38px;
 			    font-size: 14px;
 			    color: #666;
 			    line-height: 28px;

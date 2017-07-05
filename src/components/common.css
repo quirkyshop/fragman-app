@@ -1,6 +1,8 @@
 @import url(~antd/dist/antd.css);
 html, body, :global(#root) {
-  height: 100%; }
+  height: 100%;
+  width: 100%;
+  -webkit-app-region: drag; }
 
 #eku-root {
   height: 100%; }

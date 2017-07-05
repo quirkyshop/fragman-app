@@ -1,7 +1,7 @@
 {
   "transport": {
     "module": "github",
-    "repository": "https://github.com/quirkyshop/test-electron-auto-upload",
-    "token": ""
+    "repository": "https://github.com/quirkyshop/fragman-app",
+    "token": "7e198ab54949507d764817adab94bb76e40d02e0"
   }
 }

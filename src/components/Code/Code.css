@@ -8,9 +8,19 @@
     display: inline-block;
     height: 48px;
     line-height: 48px;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     border: none;
     border-bottom: 1px solid #e5e5e5; }
+  .code-item-wrapper .code-zoom-btn {
+    height: 32px;
+    line-height: 32px;
+    text-align: right;
+    cursor: pointer;
+    font-size: 16px; }
+    .code-item-wrapper .code-zoom-btn .code-zoom-btn-icon {
+      font-size: 20px;
+      margin-left: 8px;
+      vertical-align: middle; }
   .code-item-wrapper .code-item-fav-btn {
     display: inline-block;
     vertical-align: top; }
@@ -25,9 +35,5 @@
     border-bottom: 1px solid #e5e5e5;
     box-shadow: none; }
   .code-item-wrapper .code-item-content-root {
-    width: 500px; }
-  .code-item-wrapper .code-item-content {
-    border: 1px solid #e5e5e5;
-    cursor: text;
-    min-height: 250px;
-    padding: 10px; }
+    width: 500px;
+    -webkit-app-region: no-drag; }

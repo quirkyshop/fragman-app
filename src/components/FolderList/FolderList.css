@@ -1,6 +1,8 @@
 @import url(~antd/dist/antd.css);
 html, body, :global(#root) {
-  height: 100%; }
+  height: 100%;
+  width: 100%;
+  -webkit-app-region: drag; }
 
 #eku-root {
   height: 100%; }
@@ -29,6 +31,9 @@ html, body, :global(#root) {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap; }
+
+.catekey-icon {
+  margin-right: 8px; }
 
 .folder-wrapper {
   position: relative;
@@ -110,10 +115,15 @@ html, body, :global(#root) {
     .folder-wrapper .category-item-wrapper .category-item-value .fav-empty-contens {
       text-align: left;
       padding-left: 24px;
-      color: #e5e5e5; }
+      color: #e5e5e5;
+      -webkit-user-select: none; }
+    .folder-wrapper .category-item-wrapper .category-item-value .fav-empty-folder-name {
+      -webkit-user-select: none;
+      color: #e5e5e5;
+      text-align: left; }
     .folder-wrapper .category-item-wrapper .category-item-value .category-item-name {
       text-align: left;
-      padding: 0px 24px;
+      padding: 0 12px 0 38px;
       font-size: 14px;
       color: #666;
       line-height: 28px;

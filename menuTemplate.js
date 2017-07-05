@@ -5,7 +5,16 @@ function getTemplate(appName, platform) {
       submenu: [
         {label: 'favMode'},
         {label: 'draftMode'},
-        {type: 'separator'}
+        {type: 'separator'},
+        {role: 'undo'},
+        {role: 'redo'},
+        {type: 'separator'},
+        {role: 'cut'},
+        {role: 'copy'},
+        {role: 'paste'},
+        {role: 'pasteandmatchstyle'},
+        {role: 'delete'},
+        {role: 'selectall'}
       ]
     },
     {
