@@ -1,7 +1,7 @@
 {
   "name": "fragman",
   "productName": "fragman",
-  "version": "0.1.24",
+  "version": "0.1.26",
   "description": "Manage your code fragment.",
   "author": "quirkyvar",
   "private": false,
@@ -65,5 +65,8 @@
     "build:linux": "ELECTRON_MIRROR=$electronMirror build --linux",
     "publish": "publish"
   },
-  "optionalDependencies": {"7zip-bin": "^2.0.4", "7zip-bin-mac": "^1.0.1"}
+  "optionalDependencies": {
+    "7zip-bin": "^2.0.4",
+    "7zip-bin-mac": "^1.0.1"
+  }
 }
