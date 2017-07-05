@@ -1,0 +1,7 @@
+{
+  "darwin-x64-prod": {
+    "update": "https://github.com/quirkyshop/fragman-app/releases/download/darwin-x64-prod-v0.1.26/release.json",
+    "install": "https://github.com/quirkyshop/fragman-app/releases/download/darwin-x64-prod-v0.1.26/fragman-0.1.26.dmg",
+    "version": "0.1.26"
+  }
+}
